@@ -1,0 +1,560 @@
+ MySQL  localhost:33060+ ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| d13                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0192 sec)
+ MySQL  localhost:33060+ ssl  SQL > use d13;
+Default schema set to `d13`.
+Fetching global names, object names from `d13` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  d13  SQL > show tables;
++---------------+
+| Tables_in_d13 |
++---------------+
+| blog          |
+| employee      |
+| employee1     |
+| user          |
++---------------+
+4 rows in set (0.0046 sec)
+
+  MySQL  localhost:33060+ ssl  d13  SQL > create table appointments(id int,patient_name varchar(50),appointment_date date,appointment_time time);
+Query OK, 0 rows affected (0.2035 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > show tables;
++---------------+
+| Tables_in_d13 |
++---------------+
+| appointments  |
+| blog          |
+| employee      |
+| employee1     |
+| user          |
++---------------+
+5 rows in set (0.0044 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table orders(order_id int,item varchar(50),ordered_at datetime,shipped_at timestamp);
+Query OK, 0 rows affected (0.1178 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > show tables;
++---------------+
+| Tables_in_d13 |
++---------------+
+| appointments  |
+| blog          |
+| employee      |
+| employee1     |
+| orders        |
+| user          |
++---------------+
+6 rows in set (0.0033 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table students(id int,name varchar(20),age int,city varchar(20));
+Query OK, 0 rows affected (0.1140 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > show tables;
++---------------+
+| Tables_in_d13 |
++---------------+
+| appointments  |
+| blog          |
+| employee      |
+| employee1     |
+| orders        |
+| students      |
+| user          |
++---------------+
+7 rows in set (0.0035 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table employees(eid int,ename varchar(20),elocation varchar(20));
+Query OK, 0 rows affected (0.1128 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table products(product_id int,product_name varchar(20),price int);
+Query OK, 0 rows affected (0.1119 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > show tables;
++---------------+
+| Tables_in_d13 |
++---------------+
+| appointments  |
+| blog          |
+| employee      |
+| employee1     |
+| employees     |
+| orders        |
+| products      |
+| students      |
+| user          |
++---------------+
+9 rows in set (0.0036 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > ALTER TABLE Employees
+                                      -> ADD salary DECIMAL(10,2),
+                                      -> ADD department INT;
+Query OK, 0 rows affected (0.1725 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > show tables;
++---------------+
+| Tables_in_d13 |
++---------------+
+| appointments  |
+| blog          |
+| employee      |
+| employee1     |
+| employees     |
+| orders        |
+| products      |
+| students      |
+| user          |
++---------------+
+9 rows in set (0.0262 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.0880 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into students values(1,"bhumika",20,"Mandepudi");
+Query OK, 1 row affected (0.0850 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.0042 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from students;
++----+---------+-----+-----------+
+| id | name    | age | city      |
++----+---------+-----+-----------+
+|  1 | bhumika |  20 | Mandepudi |
++----+---------+-----+-----------+
+1 row in set (0.0011 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| eid        | int           | YES  |     | NULL    |       |
+| ename      | varchar(20)   | YES  |     | NULL    |       |
+| elocation  | varchar(20)   | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | int           | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+5 rows in set (0.0418 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > ALTER TABLE Employees
+                                      -> MODIFY department VARCHAR(50);
+Query OK, 0 rows affected (0.2025 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| eid        | int           | YES  |     | NULL    |       |
+| ename      | varchar(20)   | YES  |     | NULL    |       |
+| elocation  | varchar(20)   | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+5 rows in set (0.0034 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into employees values(1,"Resh","Challapalli",100000,"HR");
+Query OK, 1 row affected (0.0599 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| eid        | int           | YES  |     | NULL    |       |
+| ename      | varchar(20)   | YES  |     | NULL    |       |
+| elocation  | varchar(20)   | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+5 rows in set (0.0035 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+
+| eid | ename | elocation   | salary    | department |
++-----+-------+-------------+-----------+------------+
+|   1 | Resh  | Challapalli | 100000.00 | HR         |
++-----+-------+-------------+-----------+------------+
+1 row in set (0.0197 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc products;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_id   | int         | YES  |     | NULL    |       |
+| product_name | varchar(20) | YES  |     | NULL    |       |
+| price        | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0037 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into products values(101,"laptop",80000),(102,"Keyboard",5000),(103,"Mouse",1000);
+Query OK, 3 rows affected (0.0192 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  d13  SQL > desc products;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_id   | int         | YES  |     | NULL    |       |
+| product_name | varchar(20) | YES  |     | NULL    |       |
+| price        | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0533 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from products;
++------------+--------------+-------+
+| product_id | product_name | price |
++------------+--------------+-------+
+|        101 | laptop       | 80000 |
+|        102 | Keyboard     |  5000 |
+|        103 | Mouse        |  1000 |
++------------+--------------+-------+
+3 rows in set (0.0012 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc appointments;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| id               | int         | YES  |     | NULL    |       |
+| patient_name     | varchar(50) | YES  |     | NULL    |       |
+| appointment_date | date        | YES  |     | NULL    |       |
+| appointment_time | time        | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.0049 sec)
+
+  MySQL  localhost:33060+ ssl  d13  SQL > insert into appointments values(1,"Bhumi","2026-04-20","09:19:59");
+Query OK, 1 row affected (0.0657 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from appointments;
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Bhumi        | 2026-04-20       | 09:19:59         |
++----+--------------+------------------+------------------+
+1 row in set (0.0207 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc orders;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| order_id   | int         | YES  |     | NULL    |       |
+| item       | varchar(50) | YES  |     | NULL    |       |
+| ordered_at | datetime    | YES  |     | NULL    |       |
+| shipped_at | timestamp   | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.0037 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into orders values(101,"Teddy","2026-04-21 07:30:59",current_timestamp),(1011,"gift box","2026-05-20 12:00:00",current_timestamp);
+Query OK, 2 rows affected (0.0662 sec)
+
+Records: 2  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from orders;
++----------+----------+---------------------+---------------------+
+| order_id | item     | ordered_at          | shipped_at          |
++----------+----------+---------------------+---------------------+
+|      101 | Teddy    | 2026-04-21 07:30:59 | 2026-04-20 21:27:19 |
+|     1011 | gift box | 2026-05-20 12:00:00 | 2026-04-20 21:27:19 |
++----------+----------+---------------------+---------------------+
+2 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.0031 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from students;
++----+---------+-----+-----------+
+| id | name    | age | city      |
++----+---------+-----+-----------+
+|  1 | bhumika |  20 | Mandepudi |
++----+---------+-----+-----------+
+1 row in set (0.0531 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into students values(2,"Resh",20,"Vijayawada");
+Query OK, 1 row affected (0.0609 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from students;
++----+---------+-----+------------+
+| id | name    | age | city       |
++----+---------+-----+------------+
+|  1 | bhumika |  20 | Mandepudi  |
+|  2 | Resh    |  20 | Vijayawada |
++----+---------+-----+------------+
+2 rows in set (0.0011 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > update students set city="Bangalore" where id=2;
+Query OK, 1 row affected (0.0701 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from students;
++----+---------+-----+-----------+
+| id | name    | age | city      |
++----+---------+-----+-----------+
+|  1 | bhumika |  20 | Mandepudi |
+|  2 | Resh    |  20 | Bangalore |
++----+---------+-----+-----------+
+2 rows in set (0.0010 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| eid        | int           | YES  |     | NULL    |       |
+| ename      | varchar(20)   | YES  |     | NULL    |       |
+| elocation  | varchar(20)   | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+5 rows in set (0.0036 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+
+| eid | ename | elocation   | salary    | department |
++-----+-------+-------------+-----------+------------+
+|   1 | Resh  | Challapalli | 100000.00 | HR         |
++-----+-------+-------------+-----------+------------+
+1 row in set (0.0243 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into employees values(2,"Bhumi","Mandepudi",120000,"HR");
+Query OK, 1 row affected (0.0854 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into employees values(3,"Sai","Vijayawada",120000,"HR");
+Query OK, 1 row affected (0.0209 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+
+| eid | ename | elocation   | salary    | department |
++-----+-------+-------------+-----------+------------+
+|   1 | Resh  | Challapalli | 100000.00 | HR         |
+|   2 | Bhumi | Mandepudi   | 120000.00 | HR         |
+|   3 | Sai   | Vijayawada  | 120000.00 | HR         |
++-----+-------+-------------+-----------+------------+
+3 rows in set (0.0227 sec)
+ MySQL  localhost:33060+ ssl  d13  SQL > update employees set salary=salary +5000 where department="HR";
+Query OK, 3 rows affected (0.0256 sec)
+
+Rows matched: 3  Changed: 3  Warnings: 0
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+
+| eid | ename | elocation   | salary    | department |
++-----+-------+-------------+-----------+------------+
+|   1 | Resh  | Challapalli | 105000.00 | HR         |
+|   2 | Bhumi | Mandepudi   | 125000.00 | HR         |
+|   3 | Sai   | Vijayawada  | 125000.00 | HR         |
++-----+-------+-------------+-----------+------------+
+3 rows in set (0.0064 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc products;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_id   | int         | YES  |     | NULL    |       |
+| product_name | varchar(20) | YES  |     | NULL    |       |
+| price        | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0659 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > update products set price=0;
+Query OK, 3 rows affected (0.0628 sec)
+
+Rows matched: 3  Changed: 3  Warnings: 0
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from products;
++------------+--------------+-------+
+| product_id | product_name | price |
++------------+--------------+-------+
+|        101 | laptop       |     0 |
+|        102 | Keyboard     |     0 |
+|        103 | Mouse        |     0 |
++------------+--------------+-------+
+3 rows in set (0.0016 sec)'
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc appointments;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| id               | int         | YES  |     | NULL    |       |
+| patient_name     | varchar(50) | YES  |     | NULL    |       |
+| appointment_date | date        | YES  |     | NULL    |       |
+| appointment_time | time        | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.0744 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from appointments;
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Bhumi        | 2026-04-20       | 09:19:59         |
++----+--------------+------------------+------------------+
+1 row in set (0.0663 sec)
+ 
+ MySQL  localhost:33060+ ssl  d13  SQL > update appointments set appointment_date ="2024-07-20" where id =1;
+Query OK, 1 row affected (0.0445 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from appointments;
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Bhumi        | 2024-07-20       | 09:19:59         |
++----+--------------+------------------+------------------+
+1 row in set (0.0014 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from students;
++----+---------+-----+-----------+
+| id | name    | age | city      |
++----+---------+-----+-----------+
+|  1 | bhumika |  20 | Mandepudi |
+|  2 | Resh    |  20 | Bangalore |
++----+---------+-----+-----------+
+2 rows in set (0.0011 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into students values(3,"neha",21,"Assam");
+Query OK, 1 row affected (0.0502 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from students;
++----+---------+-----+-----------+
+| id | name    | age | city      |
++----+---------+-----+-----------+
+|  1 | bhumika |  20 | Mandepudi |
+|  2 | Resh    |  20 | Bangalore |
+|  3 | neha    |  21 | Assam     |
++----+---------+-----+-----------+
+3 rows in set (0.0020 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > delete from students where id=3;
+Query OK, 1 row affected (0.0730 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from students;
++----+---------+-----+-----------+
+| id | name    | age | city      |
++----+---------+-----+-----------+
+|  1 | bhumika |  20 | Mandepudi |
+|  2 | Resh    |  20 | Bangalore |
++----+---------+-----+-----------+
+2 rows in set (0.0019 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+
+| eid | ename | elocation   | salary    | department |
++-----+-------+-------------+-----------+------------+
+|   1 | Resh  | Challapalli | 105000.00 | HR         |
+|   2 | Bhumi | Mandepudi   | 125000.00 | HR         |
+|   3 | Sai   | Vijayawada  | 125000.00 | HR         |
++-----+-------+-------------+-----------+------------+
+3 rows in set (0.0009 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into employees values(4,"tarak","Guntur",150000,"Finance");
+Query OK, 1 row affected (0.0679 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+
+| eid | ename | elocation   | salary    | department |
++-----+-------+-------------+-----------+------------+
+|   1 | Resh  | Challapalli | 105000.00 | HR         |
+|   2 | Bhumi | Mandepudi   | 125000.00 | HR         |
+|   3 | Sai   | Vijayawada  | 125000.00 | HR         |
+|   4 | tarak | Guntur      | 150000.00 | Finance    |
++-----+-------+-------------+-----------+------------+
+4 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > delete from employees where department="finance";
+Query OK, 1 row affected (0.0629 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+
+| eid | ename | elocation   | salary    | department |
++-----+-------+-------------+-----------+------------+
+|   1 | Resh  | Challapalli | 105000.00 | HR         |
+|   2 | Bhumi | Mandepudi   | 125000.00 | HR         |
+|   3 | Sai   | Vijayawada  | 125000.00 | HR         |
++-----+-------+-------------+-----------+------------+
+3 rows in set (0.0546 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from products;
++------------+--------------+-------+
+| product_id | product_name | price |
++------------+--------------+-------+
+|        101 | laptop       |     0 |
+|        102 | Keyboard     |     0 |
+|        103 | Mouse        |     0 |
++------------+--------------+-------+
+3 rows in set (0.0020 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > delete from products;
+Query OK, 3 rows affected (0.0704 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from appointments;
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Bhumi        | 2024-07-20       | 09:19:59         |
++----+--------------+------------------+------------------+
+1 row in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > delete from appointments where appointment_date<"2024-06-01";
+Query OK, 0 rows affected (0.0045 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from appointments;
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Bhumi        | 2024-07-20       | 09:19:59         |
++----+--------------+------------------+------------------+
+1 row in set (0.0014 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from orders;
++----------+----------+---------------------+---------------------+
+| order_id | item     | ordered_at          | shipped_at          |
++----------+----------+---------------------+---------------------+
+|      101 | Teddy    | 2026-04-21 07:30:59 | 2026-04-20 21:27:19 |
+|     1011 | gift box | 2026-05-20 12:00:00 | 2026-04-20 21:27:19 |
++----------+----------+---------------------+---------------------+
+2 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > delete from orders where shipped_at is null;
+Query OK, 0 rows affected (0.0010 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from orders;
++----------+----------+---------------------+---------------------+
+| order_id | item     | ordered_at          | shipped_at          |
++----------+----------+---------------------+---------------------+
+|      101 | Teddy    | 2026-04-21 07:30:59 | 2026-04-20 21:27:19 |
+|     1011 | gift box | 2026-05-20 12:00:00 | 2026-04-20 21:27:19 |
++----------+----------+---------------------+---------------------+
+2 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  d13  SQL >
