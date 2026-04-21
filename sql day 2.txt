@@ -1,0 +1,383 @@
+MySQL Shell 8.0.45
+
+Copyright (c) 2016, 2026, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 19 (X protocol)
+Server version: 8.0.45 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:33060+ ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| d13                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0656 sec)
+
+ MySQL  localhost:33060+ ssl  SQL > use d13
+Default schema set to `d13`.
+Fetching global names, object names from `d13` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > show tables;
++---------------+
+| Tables_in_d13 |
++---------------+
+| appointments  |
+| blog          |
+| employee      |
+| employee1     |
+| employees     |
+| orders        |
+| products      |
+| students      |
+| user          |
++---------------+
+9 rows in set (0.0026 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc products;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_id   | int         | YES  |     | NULL    |       |
+| product_name | varchar(20) | YES  |     | NULL    |       |
+| price        | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0227 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > alter table products add discount decimal(5,2);
+Query OK, 0 rows affected (0.2806 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > alter table products add stock_quantity int;
+Query OK, 0 rows affected (0.1480 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc products;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| product_id     | int          | YES  |     | NULL    |       |
+| product_name   | varchar(20)  | YES  |     | NULL    |       |
+| price          | int          | YES  |     | NULL    |       |
+| discount       | decimal(5,2) | YES  |     | NULL    |       |
+| stock_quantity | int          | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+5 rows in set (0.0233 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| eid        | int           | YES  |     | NULL    |       |
+| ename      | varchar(20)   | YES  |     | NULL    |       |
+| elocation  | varchar(20)   | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+5 rows in set (0.0069 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > alter table products add bonus_percent decimal(10,2);
+Query OK, 0 rows affected (0.1455 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| eid        | int           | YES  |     | NULL    |       |
+| ename      | varchar(20)   | YES  |     | NULL    |       |
+| elocation  | varchar(20)   | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+5 rows in set (0.0038 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > alter table employees add bonus_percent decimal(10,2);
+Query OK, 0 rows affected (0.1024 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > desc employees;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| eid           | int           | YES  |     | NULL    |       |
+| ename         | varchar(20)   | YES  |     | NULL    |       |
+| elocation     | varchar(20)   | YES  |     | NULL    |       |
+| salary        | decimal(10,2) | YES  |     | NULL    |       |
+| department    | varchar(50)   | YES  |     | NULL    |       |
+| bonus_percent | decimal(10,2) | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+6 rows in set (0.0089 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from products;
+Empty set (0.0017 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > INSERT INTO products (product_id, product_name, price, discount, stock_quantity)
+                                      -> VALUES
+                                      -> (101, 'Laptop', 55000, 10, 15),
+                                      -> (102, 'Mobile Phone', 25000, 5, 30),
+                                      -> (103, 'Headphones', 2000, 15, 50),
+                                      -> (104, 'Smart Watch', 5000, 8, 25),
+                                      -> (105, 'Keyboard', 1500, 12, 40);
+Query OK, 5 rows affected (0.0928 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > alter table products drop column bonus_percent;
+Query OK, 0 rows affected (0.0566 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from products;
++------------+--------------+-------+----------+----------------+
+| product_id | product_name | price | discount | stock_quantity |
++------------+--------------+-------+----------+----------------+
+|        101 | Laptop       | 55000 |    10.00 |             15 |
+|        102 | Mobile Phone | 25000 |     5.00 |             30 |
+|        103 | Headphones   |  2000 |    15.00 |             50 |
+|        104 | Smart Watch  |  5000 |     8.00 |             25 |
+|        105 | Keyboard     |  1500 |    12.00 |             40 |
++------------+--------------+-------+----------+----------------+
+5 rows in set (0.0012 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_id,product_name,discount,price*stock_quantity as total_value from products;
++------------+--------------+----------+-------------+
+| product_id | product_name | discount | total_value |
++------------+--------------+----------+-------------+
+|        101 | Laptop       |    10.00 |      825000 |
+|        102 | Mobile Phone |     5.00 |      750000 |
+|        103 | Headphones   |    15.00 |      100000 |
+|        104 | Smart Watch  |     8.00 |      125000 |
+|        105 | Keyboard     |    12.00 |       60000 |
++------------+--------------+----------+-------------+
+5 rows in set (0.0558 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_name,price-5 as sale_price from products;
++--------------+------------+
+| product_name | sale_price |
++--------------+------------+
+| Laptop       |      54995 |
+| Mobile Phone |      24995 |
+| Headphones   |       1995 |
+| Smart Watch  |       4995 |
+| Keyboard     |       1495 |
++--------------+------------+
+5 rows in set (0.0168 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_id,product_name,price,discount,price*1.10 as price_increase from products;
++------------+--------------+-------+----------+----------------+
+| product_id | product_name | price | discount | price_increase |
++------------+--------------+-------+----------+----------------+
+|        101 | Laptop       | 55000 |    10.00 |       60500.00 |
+|        102 | Mobile Phone | 25000 |     5.00 |       27500.00 |
+|        103 | Headphones   |  2000 |    15.00 |        2200.00 |
+|        104 | Smart Watch  |  5000 |     8.00 |        5500.00 |
+|        105 | Keyboard     |  1500 |    12.00 |        1650.00 |
++------------+--------------+-------+----------+----------------+
+5 rows in set (0.0084 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_id%2 ,product_name as remainder from products;
+
++--------------+--------------+
+| product_id%2 | remainder    |
++--------------+--------------+
+|            1 | Laptop       |
+|            0 | Mobile Phone |
+|            1 | Headphones   |
+|            0 | Smart Watch  |
+|            1 | Keyboard     |
++--------------+--------------+
+5 rows in set (0.0684 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_id,product_id%2 as remainder from products;
++------------+-----------+
+| product_id | remainder |
++------------+-----------+
+|        101 |         1 |
+|        102 |         0 |
+|        103 |         1 |
+|        104 |         0 |
+|        105 |         1 |
++------------+-----------+
+5 rows in set (0.0014 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from products where product_id%2=0;
++------------+--------------+-------+----------+----------------+
+| product_id | product_name | price | discount | stock_quantity |
++------------+--------------+-------+----------+----------------+
+|        102 | Mobile Phone | 25000 |     5.00 |             30 |
+|        104 | Smart Watch  |  5000 |     8.00 |             25 |
++------------+--------------+-------+----------+----------------+
+2 rows in set (0.0024 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from products;
++------------+--------------+-------+----------+----------------+
+| product_id | product_name | price | discount | stock_quantity |
++------------+--------------+-------+----------+----------------+
+|        101 | Laptop       | 55000 |    10.00 |             15 |
+|        102 | Mobile Phone | 25000 |     5.00 |             30 |
+|        103 | Headphones   |  2000 |    15.00 |             50 |
+|        104 | Smart Watch  |  5000 |     8.00 |             25 |
+|        105 | Keyboard     |  1500 |    12.00 |             40 |
++------------+--------------+-------+----------+----------------+
+5 rows in set (0.0012 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_id,product_name,stock_quantity/4 as shared_stock from products;
++------------+--------------+--------------+
+| product_id | product_name | shared_stock |
++------------+--------------+--------------+
+|        101 | Laptop       |       3.7500 |
+|        102 | Mobile Phone |       7.5000 |
+|        103 | Headphones   |      12.5000 |
+|        104 | Smart Watch  |       6.2500 |
+|        105 | Keyboard     |      10.0000 |
++------------+--------------+--------------+
+5 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > SELECT product_id, product_name, price,
+                                      ->        price - 2 AS profit_per_unit
+                                      -> FROM products;
++------------+--------------+-------+-----------------+
+| product_id | product_name | price | profit_per_unit |
++------------+--------------+-------+-----------------+
+|        101 | Laptop       | 55000 |           54998 |
+|        102 | Mobile Phone | 25000 |           24998 |
+|        103 | Headphones   |  2000 |            1998 |
+|        104 | Smart Watch  |  5000 |            4998 |
+|        105 | Keyboard     |  1500 |            1498 |
++------------+--------------+-------+-----------------+
+5 rows in set (0.0018 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_id,product_name,price,((price*50)-100) as bulk_order from products;
++------------+--------------+-------+------------+
+| product_id | product_name | price | bulk_order |
++------------+--------------+-------+------------+
+|        101 | Laptop       | 55000 |    2749900 |
+|        102 | Mobile Phone | 25000 |    1249900 |
+|        103 | Headphones   |  2000 |      99900 |
+|        104 | Smart Watch  |  5000 |     249900 |
+|        105 | Keyboard     |  1500 |      74900 |
++------------+--------------+-------+------------+
+5 rows in set (0.0016 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+---------------+
+| eid | ename | elocation   | salary    | department | bonus_percent |
++-----+-------+-------------+-----------+------------+---------------+
+|   1 | Resh  | Challapalli | 105000.00 | HR         |          NULL |
+|   2 | Bhumi | Mandepudi   | 125000.00 | HR         |          NULL |
+|   3 | Sai   | Vijayawada  | 125000.00 | HR         |          NULL |
++-----+-------+-------------+-----------+------------+---------------+
+3 rows in set (0.0021 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into employees(bonus_percent) values(10),(20),(30);
+Query OK, 3 rows affected (0.0640 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++------+-------+-------------+-----------+------------+---------------+
+| eid  | ename | elocation   | salary    | department | bonus_percent |
++------+-------+-------------+-----------+------------+---------------+
+|    1 | Resh  | Challapalli | 105000.00 | HR         |          NULL |
+|    2 | Bhumi | Mandepudi   | 125000.00 | HR         |          NULL |
+|    3 | Sai   | Vijayawada  | 125000.00 | HR         |          NULL |
+| NULL | NULL  | NULL        |      NULL | NULL       |         10.00 |
+| NULL | NULL  | NULL        |      NULL | NULL       |         20.00 |
+| NULL | NULL  | NULL        |      NULL | NULL       |         30.00 |
++------+-------+-------------+-----------+------------+---------------+
+6 rows in set (0.0013 sec)
+ 
+ MySQL  localhost:33060+ ssl  d13  SQL > delete from employees
+                                      -> where eid IS NULL
+                                      -> AND ename IS NULL
+                                      -> AND elocation IS NULL
+                                      -> AND salary IS NULL
+                                      -> AND department IS NULL;
+Query OK, 3 rows affected (0.0729 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+---------------+
+| eid | ename | elocation   | salary    | department | bonus_percent |
++-----+-------+-------------+-----------+------------+---------------+
+|   1 | Resh  | Challapalli | 105000.00 | HR         |          NULL |
+|   2 | Bhumi | Mandepudi   | 125000.00 | HR         |          NULL |
+|   3 | Sai   | Vijayawada  | 125000.00 | HR         |          NULL |
++-----+-------+-------------+-----------+------------+---------------+
+3 rows in set (0.0043 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > update employees set bonus_percent = 10 where eid=1;
+Query OK, 1 row affected (0.0711 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > update employees set bonus_percent = 30 where eid=2;
+Query OK, 1 row affected (0.0077 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > update employees set bonus_percent = 20 where eid=3;
+Query OK, 1 row affected (0.0641 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select * from employees;
++-----+-------+-------------+-----------+------------+---------------+
+| eid | ename | elocation   | salary    | department | bonus_percent |
++-----+-------+-------------+-----------+------------+---------------+
+|   1 | Resh  | Challapalli | 105000.00 | HR         |         10.00 |
+|   2 | Bhumi | Mandepudi   | 125000.00 | HR         |         30.00 |
+|   3 | Sai   | Vijayawada  | 125000.00 | HR         |         20.00 |
++-----+-------+-------------+-----------+------------+---------------+
+3 rows in set (0.0011 sec)
+
+MySQL  localhost:33060+ ssl  d13  SQL > SELECT eid, ename, salary,
+                                      ->        salary * 12 AS annual_salary
+                                      -> FROM employees;
++-----+-------+-----------+---------------+
+| eid | ename | salary    | annual_salary |
++-----+-------+-----------+---------------+
+|   1 | Resh  | 105000.00 |    1260000.00 |
+|   2 | Bhumi | 125000.00 |    1500000.00 |
+|   3 | Sai   | 125000.00 |    1500000.00 |
++-----+-------+-----------+---------------+
+3 rows in set (0.0015 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select eid,ename,salary,(salary*(bonus_percent/100)) as bonus_amount from employees;
++-----+-------+-----------+----------------+
+| eid | ename | salary    | bonus_amount   |
++-----+-------+-----------+----------------+
+|   1 | Resh  | 105000.00 | 10500.00000000 |
+|   2 | Bhumi | 125000.00 | 37500.00000000 |
+|   3 | Sai   | 125000.00 | 25000.00000000 |
++-----+-------+-----------+----------------+
+3 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select eid,ename,salary,salary+200 as total_compensation from employees;
++-----+-------+-----------+--------------------+
+| eid | ename | salary    | total_compensation |
++-----+-------+-----------+--------------------+
+|   1 | Resh  | 105000.00 |          105200.00 |
+|   2 | Bhumi | 125000.00 |          125200.00 |
+|   3 | Sai   | 125000.00 |          125200.00 |
++-----+-------+-----------+--------------------+
+3 rows in set (0.0025 sec)
