@@ -1,0 +1,405 @@
+MySQL Shell 8.0.45
+
+Copyright (c) 2016, 2026, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 21 (X protocol)
+Server version: 8.0.45 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:33060+ ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| company_db         |
+| d13                |
+| information_schema |
+| library_db         |
+| mysql              |
+| performance_schema |
+| sakila             |
+| school_db          |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.0616 sec)
+
+ MySQL  localhost:33060+ ssl  SQL > use company_db;
+Default schema set to `company_db`.
+Fetching global names, object names from `company_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > show tables;
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
+| products             |
++----------------------+
+2 rows in set (0.0026 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc products;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| product_id   | int          | YES  |     | NULL    |       |
+| product_name | varchar(100) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+3 rows in set (0.0670 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > alter table products add column stock_quantity int;
+Query OK, 0 rows affected (0.2748 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc products;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| product_id     | int          | YES  |     | NULL    |       |
+| product_name   | varchar(100) | YES  |     | NULL    |       |
+| price          | float        | YES  |     | NULL    |       |
+| stock_quantity | int          | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.0056 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products;
+Empty set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > INSERT INTO products (product_id, product_name, price, stock_quantity)
+                                             -> VALUES
+                                             -> (1, 'Laptop', 55000.00, 10),
+
+                                             -> (2, 'Mouse', 799.50, 50),
+                                             -> (3, 'Keyboard', 1499.00, 30),
+                                             -> (4, 'Monitor', 12000.75, 15),
+                                             -> (5, 'Headphones', 2499.99, 25);
+Query OK, 5 rows affected (0.0868 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products;
++------------+--------------+---------+----------------+
+| product_id | product_name | price   | stock_quantity |
++------------+--------------+---------+----------------+
+|          1 | Laptop       |   55000 |             10 |
+|          2 | Mouse        |   799.5 |             50 |
+|          3 | Keyboard     |    1499 |             30 |
+|          4 | Monitor      | 12000.8 |             15 |
+|          5 | Headphones   | 2499.99 |             25 |
++------------+--------------+---------+----------------+
+5 rows in set (0.0015 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products WHERE price = 500;
+Empty set (0.0014 sec)
+ 
+ MySQL  localhost:33060+ ssl  company_db  SQL > drop table products;
+Query OK, 0 rows affected (0.1630 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table products(product_id int,product_name varchar(50),price float,stock_quantity int);
+Query OK, 0 rows affected (0.1361 sec)
+ MySQL  localhost:33060+ ssl  company_db  SQL > INSERT INTO products (product_id, product_name, price, stock_quantity) VALUES
+                                             -> (1, 'Pen', 50, 100),
+                                             -> (2, 'Notebook', 500, 5),
+                                             -> (3, 'Laptop', 1500, 20),
+                                             -> (4, 'Mouse', 250, 60),
+                                             -> (5, 'Keyboard', 1000, 8),
+                                             -> (6, 'Monitor', 2000, 12),
+                                             -> (7, 'Eraser', 20, 200),
+                                             -> (8, 'Marker', 500, 50),
+                                             -> (9, 'Tablet', 1200, 7),
+                                             -> (10, 'Charger', 250, 55);
+Query OK, 10 rows affected (0.0658 sec)
+
+Records: 10  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products;
++------------+--------------+-------+----------------+
+| product_id | product_name | price | stock_quantity |
++------------+--------------+-------+----------------+
+|          1 | Pen          |    50 |            100 |
+|          2 | Notebook     |   500 |              5 |
+|          3 | Laptop       |  1500 |             20 |
+|          4 | Mouse        |   250 |             60 |
+|          5 | Keyboard     |  1000 |              8 |
+|          6 | Monitor      |  2000 |             12 |
+|          7 | Eraser       |    20 |            200 |
+|          8 | Marker       |   500 |             50 |
+|          9 | Tablet       |  1200 |              7 |
+|         10 | Charger      |   250 |             55 |
++------------+--------------+-------+----------------+
+10 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products WHERE price = 500;
++------------+--------------+-------+----------------+
+| product_id | product_name | price | stock_quantity |
++------------+--------------+-------+----------------+
+|          2 | Notebook     |   500 |              5 |
+|          8 | Marker       |   500 |             50 |
++------------+--------------+-------+----------------+
+2 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products WHERE price=1000;
++------------+--------------+-------+----------------+
+| product_id | product_name | price | stock_quantity |
++------------+--------------+-------+----------------+
+|          5 | Keyboard     |  1000 |              8 |
++------------+--------------+-------+----------------+
+1 row in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products WHERE price>1000;
++------------+--------------+-------+----------------+
+| product_id | product_name | price | stock_quantity |
++------------+--------------+-------+----------------+
+|          3 | Laptop       |  1500 |             20 |
+|          6 | Monitor      |  2000 |             12 |
+|          9 | Tablet       |  1200 |              7 |
++------------+--------------+-------+----------------+
+3 rows in set (0.0230 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products WHERE price<=250;
++------------+--------------+-------+----------------+
+| product_id | product_name | price | stock_quantity |
++------------+--------------+-------+----------------+
+|          1 | Pen          |    50 |            100 |
+|          4 | Mouse        |   250 |             60 |
+|          7 | Eraser       |    20 |            200 |
+|         10 | Charger      |   250 |             55 |
++------------+--------------+-------+----------------+
+4 rows in set (0.0014 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products WHERE stock_quantity<10;
++------------+--------------+-------+----------------+
+| product_id | product_name | price | stock_quantity |
++------------+--------------+-------+----------------+
+|          2 | Notebook     |   500 |              5 |
+|          5 | Keyboard     |  1000 |              8 |
+|          9 | Tablet       |  1200 |              7 |
++------------+--------------+-------+----------------+
+3 rows in set (0.0015 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products WHERE stock_quantity>=50;
++------------+--------------+-------+----------------+
+| product_id | product_name | price | stock_quantity |
++------------+--------------+-------+----------------+
+|          1 | Pen          |    50 |            100 |
+|          4 | Mouse        |   250 |             60 |
+|          7 | Eraser       |    20 |            200 |
+|          8 | Marker       |   500 |             50 |
+|         10 | Charger      |   250 |             55 |
++------------+--------------+-------+----------------+
+5 rows in set (0.0012 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from products WHERE NOT(product_name = 'pen');
++------------+--------------+-------+----------------+
+| product_id | product_name | price | stock_quantity |
++------------+--------------+-------+----------------+
+|          2 | Notebook     |   500 |              5 |
+|          3 | Laptop       |  1500 |             20 |
+|          4 | Mouse        |   250 |             60 |
+|          5 | Keyboard     |  1000 |              8 |
+|          6 | Monitor      |  2000 |             12 |
+|          7 | Eraser       |    20 |            200 |
+|          8 | Marker       |   500 |             50 |
+|          9 | Tablet       |  1200 |              7 |
+|         10 | Charger      |   250 |             55 |
++------------+--------------+-------+----------------+
+9 rows in set (0.0017 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| emp_id     | int           | YES  |     | NULL    |       |
+| emp_name   | varchar(100)  | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0049 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > alter table employees add column city varchar(50);
+Query OK, 0 rows affected (0.1732 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > insert into employees values(1,'bhumika',48000,'sales','hyderabd'),(2,'reshmitha',38000,'finance','mumbai'),(3,'neharika',62000,'hr','bangalore'),(4,'navya',50000,'sales','chennai'),(5,'kavya',50000,'it','hyderabad');
+Query OK, 5 rows affected (0.0123 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from employees;
++--------+-----------+----------+------------+-----------+
+| emp_id | emp_name  | salary   | department | city      |
++--------+-----------+----------+------------+-----------+
+|      1 | bhumika   | 48000.00 | sales      | hyderabd  |
+|      2 | reshmitha | 38000.00 | finance    | mumbai    |
+|      3 | neharika  | 62000.00 | hr         | bangalore |
+|      4 | navya     | 50000.00 | sales      | chennai   |
+|      5 | kavya     | 50000.00 | it         | hyderabad |
++--------+-----------+----------+------------+-----------+
+5 rows in set (0.0012 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from employees where department='sales' and salary?                                          select * from employees where department='sales' and salary>40000;                                    select * from employees where department='sales' and salary>40000;
++--------+----------+----------+------------+----------+
+| emp_id | emp_name | salary   | department | city     |
++--------+----------+----------+------------+----------+
+|      1 | bhumika  | 48000.00 | sales      | hyderabd |
+|      4 | navya    | 50000.00 | sales      | chennai  |
++--------+----------+----------+------------+----------+
+2 rows in set (0.0015 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from employees where city='hyderabad' or salary>60000;
++--------+----------+----------+------------+-----------+
+| emp_id | emp_name | salary   | department | city      |
++--------+----------+----------+------------+-----------+
+|      3 | neharika | 62000.00 | hr         | bangalore |
+|      5 | kavya    | 50000.00 | it         | hyderabad |
++--------+----------+----------+------------+-----------+
+2 rows in set (0.0012 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > select * from employees where not (department='finance');
++--------+----------+----------+------------+-----------+
+| emp_id | emp_name | salary   | department | city      |
++--------+----------+----------+------------+-----------+
+|      1 | bhumika  | 48000.00 | sales      | hyderabd  |
+|      3 | neharika | 62000.00 | hr         | bangalore |
+|      4 | navya    | 50000.00 | sales      | chennai   |
+|      5 | kavya    | 50000.00 | it         | hyderabad |
++--------+----------+----------+------------+-----------+
+4 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > use school_db;
+Default schema set to `school_db`.
+Fetching global names, object names from `school_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > show tables;
++---------------------+
+| Tables_in_school_db |
++---------------------+
+| students            |
++---------------------+
+1 row in set (0.0024 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.0031 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > alter table students add column city varchar(20);
+Query OK, 0 rows affected (0.1798 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > alter table students add column marks int;
+Query OK, 0 rows affected (0.0775 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > alter table students add column email varchar(50);
+Query OK, 0 rows affected (0.1486 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students;
+Empty set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| email | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (0.0030 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > insert into students values(1,'bhumika',20,'chennai',95,'bhumika@gmail.com'),(2,'reshmitha',21,'pune',90,'reshmitha@gmail.com'),(3,'neharika',22,'mumbai',96,'neharika@gmail.com'),(4,'navya',21,'delhi',89,'navya@gmail.com'),(5,'kavya',21,'kolakata',88,'kavya@gmail.com');
+Query OK, 5 rows affected (0.0086 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students;
++----+-----------+-----+----------+-------+---------------------+
+| id | name      | age | city     | marks | email               |
++----+-----------+-----+----------+-------+---------------------+
+|  1 | bhumika   |  20 | chennai  |    95 | bhumika@gmail.com   |
+|  2 | reshmitha |  21 | pune     |    90 | reshmitha@gmail.com |
+|  3 | neharika  |  22 | mumbai   |    96 | neharika@gmail.com  |
+|  4 | navya     |  21 | delhi    |    89 | navya@gmail.com     |
+|  5 | kavya     |  21 | kolakata |    88 | kavya@gmail.com     |
++----+-----------+-----+----------+-------+---------------------+
+5 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students where city in ('mumbai','pune','kolakata');
++----+-----------+-----+----------+-------+---------------------+
+| id | name      | age | city     | marks | email               |
++----+-----------+-----+----------+-------+---------------------+
+|  2 | reshmitha |  21 | pune     |    90 | reshmitha@gmail.com |
+|  3 | neharika  |  22 | mumbai   |    96 | neharika@gmail.com  |
+|  5 | kavya     |  21 | kolakata |    88 | kavya@gmail.com     |
++----+-----------+-----+----------+-------+---------------------+
+3 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students where city not in ('delhi','chennai');
++----+-----------+-----+----------+-------+---------------------+
+| id | name      | age | city     | marks | email               |
++----+-----------+-----+----------+-------+---------------------+
+|  2 | reshmitha |  21 | pune     |    90 | reshmitha@gmail.com |
+|  3 | neharika  |  22 | mumbai   |    96 | neharika@gmail.com  |
+|  5 | kavya     |  21 | kolakata |    88 | kavya@gmail.com     |
++----+-----------+-----+----------+-------+---------------------+
+3 rows in set (0.0015 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students where email is not null;
++----+-----------+-----+----------+-------+---------------------+
+| id | name      | age | city     | marks | email               |
++----+-----------+-----+----------+-------+---------------------+
+|  1 | bhumika   |  20 | chennai  |    95 | bhumika@gmail.com   |
+|  2 | reshmitha |  21 | pune     |    90 | reshmitha@gmail.com |
+|  3 | neharika  |  22 | mumbai   |    96 | neharika@gmail.com  |
+|  4 | navya     |  21 | delhi    |    89 | navya@gmail.com     |
+|  5 | kavya     |  21 | kolakata |    88 | kavya@gmail.com     |
++----+-----------+-----+----------+-------+---------------------+
+5 rows in set (0.0011 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students where name like 's%';
+Empty set (0.0224 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students where name like '%a';
++----+-----------+-----+----------+-------+---------------------+
+| id | name      | age | city     | marks | email               |
++----+-----------+-----+----------+-------+---------------------+
+|  1 | bhumika   |  20 | chennai  |    95 | bhumika@gmail.com   |
+|  2 | reshmitha |  21 | pune     |    90 | reshmitha@gmail.com |
+|  3 | neharika  |  22 | mumbai   |    96 | neharika@gmail.com  |
+|  4 | navya     |  21 | delhi    |    89 | navya@gmail.com     |
+|  5 | kavya     |  21 | kolakata |    88 | kavya@gmail.com     |
++----+-----------+-----+----------+-------+---------------------+
+5 rows in set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students where name like '____';
+Empty set (0.0013 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students where name not like 'r%';
++----+----------+-----+----------+-------+--------------------+
+| id | name     | age | city     | marks | email              |
++----+----------+-----+----------+-------+--------------------+
+|  1 | bhumika  |  20 | chennai  |    95 | bhumika@gmail.com  |
+|  3 | neharika |  22 | mumbai   |    96 | neharika@gmail.com |
+|  4 | navya    |  21 | delhi    |    89 | navya@gmail.com    |
+|  5 | kavya    |  21 | kolakata |    88 | kavya@gmail.com    |
++----+----------+-----+----------+-------+--------------------+
+4 rows in set (0.0011 sec)
