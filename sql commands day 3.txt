@@ -1,0 +1,311 @@
+MySQL Shell 8.0.45
+
+Copyright (c) 2016, 2026, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 20 (X protocol)
+Server version: 8.0.45 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:33060+ ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| d13                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0613 sec)
+
+ MySQL  localhost:33060+ ssl  SQL > create database school_db;
+Query OK, 1 row affected (0.1291 sec)
+
+ MySQL  localhost:33060+ ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| d13                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| school_db          |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.0034 sec)
+
+ MySQL  localhost:33060+ ssl  SQL > use school_db;
+Default schema set to `school_db`.
+Fetching global names, object names from `school_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > create table students(id int,name varchar(50),age int);
+Query OK, 0 rows affected (0.1781 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > select * from students;
+Empty set (0.0111 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > desc students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.0646 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > create database company_db;
+Query OK, 1 row affected (0.0561 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| company_db         |
+| d13                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| school_db          |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.0021 sec)
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > use company_db;
+Default schema set to `company_db`.
+Fetching global names, object names from `company_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table employees(emp_id int,emp_name varchar(100),salary decimal(10,2),department varchar(50));
+Query OK, 0 rows affected (0.1255 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| emp_id     | int           | YES  |     | NULL    |       |
+| emp_name   | varchar(100)  | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0041 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table products(product_id int,product_name varchar(100),price float);
+Query OK, 0 rows affected (0.0536 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| emp_id     | int           | YES  |     | NULL    |       |
+| emp_name   | varchar(100)  | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| department | varchar(50)   | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0033 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc products;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| product_id   | int          | YES  |     | NULL    |       |
+| product_name | varchar(100) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+3 rows in set (0.0046 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > create database library_db;
+Query OK, 1 row affected (0.0702 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| company_db         |
+| d13                |
+| information_schema |
+| library_db         |
+| mysql              |
+| performance_schema |
+| sakila             |
+| school_db          |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.0023 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table books(book_id int,title varchar(150),product_name varchar(100),price float);
+Query OK, 0 rows affected (0.1166 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc books;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | YES  |     | NULL    |       |
+| title        | varchar(150) | YES  |     | NULL    |       |
+| product_name | varchar(100) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.0047 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > drop table books;
+Query OK, 0 rows affected (0.1132 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > desc books;
+ERROR: 1146: Table 'company_db.books' doesn't exist
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > use library_db;
+Default schema set to `library_db`.
+Fetching global names, object names from `library_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > create table books(book_id int,title varchar(150),product_name varchar(100),price float);
+Query OK, 0 rows affected (0.1135 sec)
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > desc books;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | YES  |     | NULL    |       |
+| title        | varchar(150) | YES  |     | NULL    |       |
+| product_name | varchar(100) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.0037 sec)
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > create table orders(order_id int,customer_name varchar(100),order_date date,amount decimal(10,2));
+Query OK, 0 rows affected (0.0382 sec)
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > desc orders;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| order_id      | int           | YES  |     | NULL    |       |
+| customer_name | varchar(100)  | YES  |     | NULL    |       |
+| order_date    | date          | YES  |     | NULL    |       |
+| amount        | decimal(10,2) | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0038 sec)
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > show tables;
++----------------------+
+| Tables_in_library_db |
++----------------------+
+| books                |
+| orders               |
++----------------------+
+2 rows in set (0.0034 sec)
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > use college_db;
+Default schema set to `college_db`.
+Fetching global names, object names from `college_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > show tables;
++----------------------+
+| Tables_in_college_db |
++----------------------+
+| college_courses      |
++----------------------+
+1 row in set (0.0028 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > drop table college_courses;
+Query OK, 0 rows affected (0.1086 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > show tables;
+Empty set (0.0030 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > create table courses(course_id int,course_name varchar(100),duration int);
+Query OK, 0 rows affected (0.1123 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > desc courses;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| course_id   | int          | YES  |     | NULL    |       |
+| course_name | varchar(100) | YES  |     | NULL    |       |
+| duration    | int          | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.0039 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > show tables;
++----------------------+
+| Tables_in_college_db |
++----------------------+
+| courses              |
++----------------------+
+1 row in set (0.0232 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| company_db         |
+| d13                |
+| information_schema |
+| library_db         |
+| mysql              |
+| performance_schema |
+| sakila             |
+| school_db          |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.0018 sec)
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > use company_db;
+Default schema set to `company_db`.
+Fetching global names, object names from `company_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > show tables;
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
+| products             |
++----------------------+
+2 rows in set (0.0023 sec)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > use library_db;
+Default schema set to `library_db`.
+Fetching global names, object names from `library_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > show tables;
++----------------------+
+| Tables_in_library_db |
++----------------------+
+| books                |
+| orders               |
++----------------------+
+2 rows in set (0.0026 sec)
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > use school_db;
+Default schema set to `school_db`.
+Fetching global names, object names from `school_db` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:33060+ ssl  school_db  SQL > show tables;
++---------------------+
+| Tables_in_school_db |
++---------------------+
+| students            |
++---------------------+
+1 row in set (0.0024 sec)
+ MySQL  localhost:33060+ ssl  school_db  SQL >
+
+
