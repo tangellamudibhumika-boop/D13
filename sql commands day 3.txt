@@ -308,4 +308,4 @@ Fetching global names, object names from `school_db` for auto-completion... Pres
 1 row in set (0.0024 sec)
  MySQL  localhost:33060+ ssl  school_db  SQL >
 
-
+sql task
